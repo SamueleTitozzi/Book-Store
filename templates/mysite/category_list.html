@@ -1,0 +1,14 @@
+{% extends 'mysite/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="category-buttons">
+    {% for category in categories %}
+    <a href="{% url 'mysite:single_category' category.pk %}" class="btn-category">
+        {{ category.title }}
+    </a>
+    {% endfor %}
+</div>
+{% endblock %}
+

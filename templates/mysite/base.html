@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="{% static 'base/css/main.css' %}">
+    <title>{{ page_title|default:"Books Store" }}</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-custom">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a href="{% url 'mysite:index' %}" class="navbar-brand d-flex align-items-center">
+            <span>📚 Books Store</span>
+        </a>
+        <div class="live-search-wrapper">
+            <form action="{% url 'mysite:search' %}" method="get" class="d-flex me-3">
+                <input
+                        class="form-control me-2"
+                        type="search"
+                        name="q"
+                        placeholder="Пошук книги або автора..."
+                        value="{{ request.GET.q }}"
+                        id="searchInput"
+                        autocomplete="off"
+                        data-live-search-url="{% url 'mysite:live-search' %}"
+                >
+                <button class="btn btn-success btn-search" type="submit">🔍</button>
+            </form>
+
+            <div id="live-search-results" class="live-search-results"></div>
+        </div>
+
+        <div class="d-flex gap-4">
+            <a href="{% url 'mysite:category' %}" class="nav-link">Категорії</a>
+            <a href="{% url 'orders:cart' %}" class="nav-link position-relative">
+                🛒 Кошик
+                <span id="cart-count" class="badge bg-danger position-absolute top-0 start-100 translate-middle">
+                      {{ cart_item|default:0 }}
+                </span>
+            </a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'orders:order_history' %}" class="nav-link">📖 Мої замовлення</a>
+            {% endif %}
+        </div>
+
+        <div class="auth-buttons d-flex gap-3">
+            {% if user.is_authenticated %}
+            <form method="post" action="{% url 'mysite:logout' %}" class="form-logout">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-logout">Вийти</button>
+            </form>
+            {% else %}
+            <a href="{% url 'mysite:login' %}" class="btn btn-login">Вхід</a>
+            <a href="{% url 'mysite:register' %}" class="btn btn-register">Реєстрація</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+{% if messages %}
+<div class="container mt-3">
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Закрити"></button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+<main class="container">
+    {% block content %}
+
+    <section class="hero-section">
+        <!-- Заголовок над слайдером -->
+        <h2 class="carousel-title carousel-title-shadow">Топ від читачів</h2>
+
+        <div class="hero-overlay">
+            <h1>Знайди свою наступну книгу 📚</h1>
+            <p>Тисячі книг у різних жанрах</p>
+
+            <a href="{% url 'mysite:category' %}" class="btn btn-lg btn-success">
+                📖 Переглянути книги
+            </a>
+        </div>
+
+        <div id="carouselMystery" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000"
+             data-bs-touch="true">
+
+            <!-- Індикатори -->
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselMystery" data-bs-slide-to="0" class="active"
+                        aria-current="true" aria-label="Слайд 1"></button>
+                <button type="button" data-bs-target="#carouselMystery" data-bs-slide-to="1"
+                        aria-label="Слайд 2"></button>
+                <button type="button" data-bs-target="#carouselMystery" data-bs-slide-to="2"
+                        aria-label="Слайд 3"></button>
+                <button type="button" data-bs-target="#carouselMystery" data-bs-slide-to="3"
+                        aria-label="Слайд 4"></button>
+                <button type="button" data-bs-target="#carouselMystery" data-bs-slide-to="4"
+                        aria-label="Слайд 5"></button>
+            </div>
+
+            <!-- Слайди -->
+            <div class="carousel-inner">
+
+                <!-- Слайд 1 -->
+                <div class="carousel-item active">
+                    <img src="{% static 'base/Служниця.png' %}" class="d-block w-auto"
+                         alt="Служниця">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Служниця — Фріда Мак-Фадден</h5>
+                        <p>Захопливий психологічний трилер про секрети, довіру і небезпеку, що ховається за дверима.</p>
+                    </div>
+                </div>
+
+                <!-- Слайд 2 -->
+                <div class="carousel-item">
+                    <img src="{% static 'base/Шкодуючи за тобою.png' %}" class="d-block w-auto"
+                         alt="Шкодуючи за тобою">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Шкодуючи за тобою</h5>
+                        <p>«Шкодуючи за тобою» Коллін Гувер — це емоційна історія про складні стосунки матері й доньки,
+                            втрату та пошук взаєморозуміння.</p>
+                    </div>
+                </div>
+
+                <!-- Слайд 3 -->
+                <div class="carousel-item">
+                    <img src="{% static 'base/Гра в кота і мишу.png' %}" class="d-block w-auto" alt="Гра в кота і мишу">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Гра в кота і мишу</h5>
+                        <p>У середині 1940-х червоногубу красуню Женев’єву (Джіджі) Парсонс переслідує сталкер. Одначе
+                            їй
+                            така увага й таємничість цього чоловіка стають приємними і дарують живу віддушину, ковток
+                            свіжого повітря, маленькі радощі життя. Щоправда, красуня гине за загадкових обставин, а
+                            вбивство лишається нерозкритим.</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'base/Посібник з убивства для хорошої дівчинки.png' %}" class="d-block w-auto"
+                         alt="Посібник з убивства для хорошої дівчинки">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Посібник з убивства для хорошої дівчинки</h5>
+                        <p>Звичайний шкільний проєкт звичайної американської школярки зі звичайного американського
+                            містечка
+                            розворушив давно забуту справу про вбивство…</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="{% static 'base/Вище неба.jpg' %}" class="d-block w-auto"
+                         alt="Вище неба. Місто вітрів. Книга 1">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h5>Вище неба. Місто вітрів. Книга 1</h5>
+                        <p>Дебютна книга циклу «Місто вітрів» - «Вище неба», написана під час пандемії, стала
+                            TikTok-сенсацією. Вона відображає особистий досвід Ліз, адже головна героїня, як і сама
+                            авторка,
+                            працює бортпровідницею.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Кнопки навігації -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselMystery" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Назад</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselMystery" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Вперед</span>
+            </button>
+        </div>
+    </section>
+    <section class="home-content">
+        <div class="container">
+            <h3 class="home-section-title">🔥 Популярні книги</h3>
+
+            <div class="home-books-grid">
+                {% for book in books %}
+                <div class="home-book-card">
+
+                    {% if book.image_path %}
+                    <img src="{% static book.image_path %}" class="home-book-img" alt="{{ book.title }}">
+                    {% endif %}
+
+                    <div class="home-book-info">
+                        <h5 class="home-book-title">{{ book.title }}</h5>
+                        <p class="home-book-author">{{ book.author }}</p>
+                        <div class="home-book-bottom">
+                            <span class="home-book-price">{{ book.price }} грн</span>
+
+                            <a href="{% url 'mysite:book-detail' book.pk %}"
+                               class="home-book-btn">
+                                Детальніше
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {% endblock %}
+</main>
+
+
+<footer class="footer footer-dark">
+    <div class="footer-container">
+
+        <div class="footer-col">
+            <h3>📚 Books Store</h3>
+            <p>Онлайн-магазин книг. Знайди свою наступну історію.</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Навігація</h4>
+            <ul>
+                <li><a href="{% url 'mysite:category' %}">Категорії</a></li>
+                <li><a href="{% url 'orders:cart' %}">Кошик</a></li>
+                <li><a href="{% url 'mysite:search' %}?q=">Пошук</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Контакти</h4>
+            <p>Email: support@books.com</p>
+            <p>Тел: +380 00 000 00 00</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Соцмережі</h4>
+            <div class="footer-socials">
+                <a href="#">Telegram</a>
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Books Store. Всі права захищені.
+    </div>
+</footer>
+
+<script>
+    const STATIC_URL = "{% get_static_prefix %}";
+</script>
+<script>
+    const liveSearchUrl = "{% url 'mysite:live-search' %}";
+</script>
+<script src="https://js.stripe.com/v3/"></script>
+<script src="{% static 'base/main.js' %}"></script>
+</body>
+</html>

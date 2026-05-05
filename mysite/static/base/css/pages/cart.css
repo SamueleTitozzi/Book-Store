@@ -1,0 +1,117 @@
+/* ================= CART PAGE ================= */
+
+/* Основний контейнер */
+.simple-cart-dark {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  background: rgba(0,0,0,0.65);
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+  color: #f0f0f0;
+}
+
+/* Заголовок */
+.simple-cart-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #ffffff;
+  text-shadow: 0 0 6px rgba(255,255,255,0.2);
+}
+
+/* Список товарів */
+.simple-cart-list {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 20px;
+}
+
+.simple-cart-item {
+  padding: 18px;
+  margin-bottom: 16px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.simple-cart-book {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.simple-cart-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 1rem;
+  color: #ddd;
+}
+
+.simple-cart-details span {
+  background: rgba(255,255,255,0.08);
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+/* Загальна сума */
+.simple-cart-total {
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+/* Порожній кошик */
+.simple-cart-empty {
+  padding: 20px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  font-size: 1.2rem;
+  color: white;
+}
+
+/* Кнопка "Reset cart" */
+.reset-form {
+    text-align: center;
+    margin: 30px 0;
+    padding: 0px;
+    max-width: auto;
+}
+
+.reset-btn {
+    background: linear-gradient(135deg, #ff5f5f, #d63031);
+    color: white;
+    border: none;
+    padding: 14px 40px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+.reset-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+.reset-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+.reset-btn:focus {
+    outline: none;
+}
+
+/* Контрол кількості */
+.qty-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.qty-number {
+    font-weight: 600;
+    min-width: 20px;
+    text-align: center;
+}
+.qty-btn.plus {
+    background-color

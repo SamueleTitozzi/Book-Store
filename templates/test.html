@@ -1,0 +1,21 @@
+<table class="table mt-5 table-bordered table-striped tabel-hover">
+    <thead class="table-dark">
+    <tr>
+        <th>Назва</th>
+        <th>Категорія</th>
+        <th>Ціна</th>
+        <th>Автор</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for book in books %}
+    <tr>
+        <td>{{ book.title }}</td>
+        <td>{{book.category}}</td>
+        <td>{{ book.price }}</td>
+        <td>{{ book.author }}</td>
+        <td>
+            <button class="btn btn-primary">Купити</button>
+        </td>
+    </tr>

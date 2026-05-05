@@ -1,0 +1,191 @@
+/* ================= COMPONENTS ================= */
+
+/* BUTTONS */
+.btn-category {
+    font-size: 2rem;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    text-decoration: none;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.btn-category:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.btn-buy,
+.btn-custom {
+    background: #2c6e49;
+    color: white;
+    border-radius: 6px;
+    padding: 8px 14px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+.btn-buy:hover,
+.btn-custom:hover {
+    background: #3e8c61;
+}
+
+.btn-login {
+    background-color: #5c3d2e;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+.btn-login:hover {
+    background-color: #7a523d;
+}
+
+.btn-register {
+    background-color: #3e6e4c;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+.btn-register:hover {
+    background-color: #4f8a5f;
+}
+
+.btn-logout {
+    background-color: #a33a3a;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+.btn-logout:hover {
+    background-color: #c94f4f;
+}
+
+.next-category-button {
+    display: flex;
+    justify-content: center; /* центрує по горизонталі */
+    margin: 40px 0;
+}
+
+.hero-overlay .btn {
+    font-size: 1.3rem;
+    padding: 16px 36px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #28a745, #218838);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+    transition: transform 0.25s ease, box-shadow 0.3s ease;
+}
+.hero-overlay .btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.primary-btn {
+    flex: 1;
+    background: #3aa76d;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.secondary-btn {
+    flex: 1;
+    padding: 14px;
+    background: #edf2f7;
+    color: #2d3748;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid #cbd5e0;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.secondary-btn:hover {
+    background: #e2e8f0;
+    color: #1a202c;
+}
+
+.close-btn {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.confirmation-actions {
+    margin-top: 20px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.order-detail-btn {
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.order-detail-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* ERROR LIST */
+.errorlist {
+    color: red;
+    margin-bottom: 10px;
+    list-style: none;
+    padding-left: 0;
+}
+
+/* CARD */
+.card {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
+    border: thick double white;
+    transition: transform 0.3s ease;
+    border-radius: 10px;
+}
+.card:hover {
+   transform: scale(1.03);
+}
+.card-body {
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(6px);
+}
+.card-title {
+   font-weight: normal;
+   font-size: 25px;
+   color: white;
+}
+.text-author-card {
+    font-weight: normal;
+    font-size: 20px;
+    color: white;
+}
+.price-card {
+    font-size: 20px;
+    color

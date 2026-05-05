@@ -1,0 +1,59 @@
+{% extends "mysite/base.html" %}
+{% load static %}
+
+
+{% block content %}
+<div class="confirmation-wrapper">
+
+    <div class="confirmation-card">
+
+        <div id="status-block">
+
+            <!-- LOADING -->
+            <div id="status-loading">
+                <h2>⏳ Обробка платежу...</h2>
+                <p>Зачекайте, підтверджуємо оплату</p>
+            </div>
+
+            <!-- SUCCESS -->
+            <div id="status-success" style="display:none;">
+                <div class="confirmation-icon">✅</div>
+                <h2>Оплата успішна!</h2>
+                <p>Замовлення №{{ order.id }}</p>
+
+                <div class="confirmation-actions">
+                    <a href="{% url 'orders:order_history' %}" class="btn-primary">
+                        📚 Мої замовлення
+                    </a>
+
+                    <a href="/" class="btn-secondary">
+                        🛍 Продовжити покупки
+                    </a>
+                </div>
+            </div>
+
+            <!-- FAILED -->
+            <div id="status-failed" style="display:none;">
+                <div class="confirmation-icon">❌</div>
+                <h2>Оплата не пройшла</h2>
+
+                <div class="confirmation-actions">
+                    <a href="{% url 'orders:checkout' %}" class="btn-primary">
+                        Спробувати ще раз
+                    </a>
+
+                    <a href="{% url 'orders:order_history' %}" class="btn-secondary">
+                        📚 Мої замовлення
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- 🔹 важливо -->
+<div id="order-status" data-order-id="{{ order.id }}"></div>
+{% endblock %}

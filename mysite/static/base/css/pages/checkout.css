@@ -1,0 +1,82 @@
+/* 🔥 контейнер */
+.checkout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 60px 20px;
+}
+
+/* 🔥 картка */
+.checkout-card {
+    width: 100%;
+    max-width: 500px;
+
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+
+    padding: 30px;
+    border-radius: 12px;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* 🔥 заголовок */
+.checkout-card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 🔥 форма */
+#checkout-form p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+/* 🔥 інпути */
+#checkout-form input,
+#checkout-form textarea,
+#checkout-form select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* 🔥 textarea */
+#checkout-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.stripe-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(0,0,0,0.6);
+
+    justify-content: center;
+    align-items: center;
+}
+
+.stripe-modal.active {
+    display: flex;
+}
+
+.stripe-modal-content {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+
+    width: 400px;
+    max-width: 90%;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}

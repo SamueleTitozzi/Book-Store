@@ -1,0 +1,60 @@
+{% extends "mysite/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="simple-cart-dark mt-5">
+    <h2 class="simple-cart-title text-center mb-4">🛒 Ваш кошик</h2>
+
+    {% if order and order.items.exists %}
+        <ul class="simple-cart-list">
+            {% for item in order.items.all %}
+                <li class="simple-cart-item">
+                    <div class="simple-cart-book">{{ item.book.title }}</div>
+
+                    <div class="simple-cart-details">
+                        <div class="qty-control">
+                            <!-- Зменшити кількість -->
+                            <form method="post" action="{% url 'orders:cart-decrease' item.pk %}" class="qty-form">
+                                {% csrf_token %}
+                                <button class="qty-btn minus">−</button>
+                            </form>
+
+                            <span class="qty-number">{{ item.quantity }}</span>
+
+                            <!-- Збільшити кількість -->
+                            <form method="post" action="{% url 'orders:cart-addquantity' item.pk %}" class="qty-form">
+                                {% csrf_token %}
+                                <button class="qty-btn plus">+</button>
+                            </form>
+                        </div>
+
+                        <span>Ціна: {{ item.book.price|floatformat:2 }} грн</span>
+                        <span>Сума: {{ item.get_total_price|floatformat:2 }} грн</span>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <!-- Дії -->
+        <div class="cart-actions mt-4 text-center">
+            <form method="get" action="{% url 'orders:checkout' %}" class="d-inline-block">
+                <button type="submit" class="payment-btn">✅ Оформити замовлення</button>
+            </form>
+
+            <form method="post" action="{% url 'orders:cart-reset' %}" class="d-inline-block ms-3">
+                {% csrf_token %}
+                <button type="submit" class="reset-btn">🗑 Очистити кошик</button>
+            </form>
+        </div>
+
+        <!-- Загальна сума -->
+        <div class="simple-cart-total text-end mt-4">
+            <strong>Загальна сума: {{ order.get_total_price|floatformat:2 }} грн</strong>
+        </div>
+    {% else %}
+        <div class="simple-cart-empty text-center">
+            Ваш кошик порожній.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

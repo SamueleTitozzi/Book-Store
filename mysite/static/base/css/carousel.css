@@ -1,0 +1,113 @@
+/* Темна сцена */
+.carousel {
+  margin: 40px auto !important;
+  padding: 20px !important;
+  background: rgba(0, 0, 0, 0.4); /* напівпрозорий чорний */
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px); /* легкий розмитий ефект */
+}
+
+/* Зображення з підсвіткою */
+.carousel-item img {
+  max-height: 600px !important;
+  object-fit: cover !important;
+  margin: 0 auto !important;
+  border-radius: 12px !important;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  transition: transform 0.5s ease-in-out;
+}
+
+/* Кнопки навігації */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: rgba(255, 255, 255, 0.3) !important;
+  border-radius: 50% !important;
+  padding: 12px !important;
+}
+
+/* Індикатори як прожектори */
+.carousel-indicators button {
+  background-color: #444 !important;
+  width: 14px !important;
+  height: 14px !important;
+  border-radius: 50% !important;
+  margin: 0 6px !important;
+  opacity: 0.7;
+}
+.carousel-indicators .active {
+  background-color: #fff !important;
+  opacity: 1;
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .carousel-item img {
+    max-height: 400px !important;
+  }
+}
+/* Заголовок над слайдером */
+.carousel-title {
+  text-align: center !important;
+  font-size: 2rem !important;
+  font-weight: 600 !important;
+  color: #f0f0f0 !important;
+  margin-bottom: 20px !important;
+}
+
+/* Опис у слайді */
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+  padding: 15px !important;
+  border-radius: 10px !important;
+  max-width: 80% !important;
+  margin: 0 auto !important;
+}
+
+.carousel-caption h5 {
+  font-size: 1.25rem !important;
+  font-weight: bold !important;
+  color: #ffffff !important;
+}
+
+.carousel-caption p {
+  font-size: 1rem !important;
+  color: #dddddd !important;
+}
+.carousel-title {
+  text-align: center !important;
+  font-size: 2.8rem !important;
+  font-weight: 700 !important;
+  color: #f8f8f8 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  margin-bottom: 30px !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* Підсвітка знизу */
+.carousel-title::after {
+  content: '' !important;
+  display: block !important;
+  width: 80px !important;
+  height: 4px !important;
+  background: #ffcc00 !important;
+  margin: 12px auto 0 !important;
+  border-radius: 2px !important;
+}
+
+/* Фонова тінь */
+.carousel-title-shadow {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Анімація появи */
+@keyframes fadeInTitle {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.carousel-title {
+  animation: fadeInTitle 1s ease-out;
+}

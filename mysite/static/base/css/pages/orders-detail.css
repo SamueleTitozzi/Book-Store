@@ -1,0 +1,100 @@
+.order-detail-card {
+    background: rgba(255, 255, 255, 0.95); /* 🔥 майже білий */
+    backdrop-filter: blur(6px);
+    border-radius: 12px;
+    padding: 18px;
+    color: #212529; /* 🔥 темний текст */
+}
+
+.order-detail-card p,
+.order-detail-card h5,
+.order-detail-card h6,
+.order-detail-card span {
+    color: #212529;
+}
+
+.order-detail-card h5 {
+    font-weight: 700;
+}
+
+.order-detail-card h5 {
+    font-weight: 700;
+}
+
+.order-detail-card .list-group-item {
+    background: #f8f9fa;
+    border-radius: 6px;
+    margin-bottom: 6px;
+}
+
+.order-detail-card {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+.order-progress {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 0;
+    position: relative;
+}
+
+.order-progress::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: #ddd;
+    z-index: 0;
+}
+
+.progress-step {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    z-index: 1;
+}
+
+.progress-step .circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #ccc;
+    color: white;
+    line-height: 40px;
+    margin: 0 auto 8px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.progress-step span {
+    font-size: 14px;
+    color: #666;
+}
+
+/* ACTIVE */
+.progress-step.active .circle {
+    background: #28a745;
+}
+
+.progress-step.active span {
+    color: #28a745;
+    font-weight: 600;
+}
+
+/* Лінія активна */
+.progress-step.active::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: -48%;
+    width: 100%;
+    height: 4px;
+    background: #28a745;
+    z-index: -1;
+}
+
+.progress-step:first-child::after {
+    display: none;
+}

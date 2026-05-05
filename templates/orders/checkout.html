@@ -1,0 +1,52 @@
+{% extends "mysite/base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="checkout-container" data-open-stripe="{{ order_confirmed|yesno:'true,false' }}">
+
+    <div class="checkout-card">
+        <h2>Оформлення замовлення</h2>
+
+        <form method="post" id="checkout-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+
+            <div class="button-group">
+                <button type="submit" class="primary-btn">
+                    Підтвердити замовлення
+                </button>
+
+                <a href="{% url 'orders:cart' %}" class="secondary-btn">
+                    Повернутися у кошик
+                </a>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+<!-- 🔥 STRIPE MODAL -->
+<div id="stripe-modal" class="stripe-modal">
+    <div class="stripe-modal-content">
+
+        <span id="close-modal" class="close-btn">&times;</span>
+
+        <h3>💳 Оплата карткою</h3>
+
+        <div id="card-element" data-stripe-key="{{ stripe_public_key }}"></div>
+
+        <div id="card-errors"></div>
+
+        <button id="pay-button" class="primary-btn mt-3">
+            Оплатити
+        </button>
+
+    </div>
+</div>
+
+<!-- 🔹 Stripe -->
+<script src="https://js.stripe.com/v3/"></script>
+
+{% endblock %}

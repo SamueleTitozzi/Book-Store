@@ -1,0 +1,20 @@
+/* ================= CATEGORY PAGE ================= */
+
+/* Контейнер для кнопок категорій */
+.category-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 24px;
+    padding: 60px 20px 40px; /* головний відступ від верху */
+}
+
+/* Заголовок сторінки */
+.category-page-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 40px 0 20px;
+    text-shadow: 0 0 8px rgba(0,0,0,0.5);
+}

@@ -1,0 +1,14 @@
+@import url('./base.css');
+@import url('./layout.css');
+@import url('./components.css');
+@import url('./carousel.css');
+
+@import url('./pages/home.css');
+@import url('./pages/books.css');
+@import url('./pages/auth.css');
+@import url('./pages/cart.css');
+@import url('./pages/orders.css');
+@import url('./pages/category.css');
+@import url('./pages/checkout.css');
+@import url('./pages/confirmation.css');
+@import url('./pages/orders-detail.css');

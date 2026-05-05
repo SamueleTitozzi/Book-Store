@@ -1,0 +1,126 @@
+/* ================= LAYOUT ================= */
+
+/* NAVBAR */
+.navbar {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.nav-link {
+    color: white;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+.nav-link:hover {
+    color: gold;
+}
+
+/* FOOTER */
+.footer {
+    margin-top: auto;
+    background: rgba(0,0,0,0.85);
+    border-top: none;
+    padding: 20px;
+    color: #ddd;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+}
+
+.footer-col h3,
+.footer-col h4 {
+    margin-bottom: 15px;
+    color: white;
+}
+
+.footer-col p,
+.footer-col li {
+    font-size: 14px;
+    color: #bbb;
+}
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+.footer-col a {
+    color: #bbb;
+    text-decoration: none;
+    transition: 0.2s;
+}
+.footer-col a:hover {
+    color: #4CAF50;
+}
+.footer-socials {
+    display: flex;
+    gap: 12px;
+}
+.footer-bottom {
+    text-align: center;
+    padding: 15px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    font-size: 13px;
+    color: #888;
+}
+
+/* SEARCH */
+.live-search-wrapper {
+    position: relative;
+    width: 450px;
+}
+.live-search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    max-height: 400px;
+    overflow-y: auto;
+    z-index: 999;
+    padding: 8px 0;
+}
+.live-search-results:empty {
+    display: none;
+}
+.live-search-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    margin: 6px 10px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    background: #fafafa;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: background 0.2s ease;
+}
+.live-search-item:hover {
+    background: #f0f0f0;
+}
+.live-search-image {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    margin-right: 14px;
+    border-radius: 6px;
+    flex-shrink: 0;
+}
+.live-search-title {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2;
+    color: #333;
+}

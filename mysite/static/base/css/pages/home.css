@@ -1,0 +1,127 @@
+/* ================= HOME PAGE ================= */
+
+/* Заголовок */
+.home-section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 60px 0 30px;
+    text-shadow: 0 0 10px rgba(255,255,255,0.25);
+}
+
+/* GRID */
+.home-books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 22px;
+    padding: 10px 20px 60px;
+}
+
+/* CARD */
+.home-book-card {
+    background: rgba(30,30,30,0.85);
+    border-radius: 14px;
+    overflow: hidden;
+    backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: column;
+    transition: 0.25s;
+}
+.home-book-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+
+/* IMAGE */
+.home-book-img {
+    width: 100%;
+    height: 365px;
+    object-fit: cover;
+    display: block;
+    transition: 0.3s;
+}
+.home-book-card:hover .home-book-img {
+    transform: scale(1.05);
+}
+
+/* INFO */
+.home-book-info {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+/* TITLE */
+.home-book-title {
+    font-size: 25px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+/* AUTHOR */
+.home-book-author {
+    font-size: 20px;
+    color: #dcdcdc;
+    margin-bottom: 12px;
+}
+
+/* BOTTOM ROW */
+.home-book-bottom {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* PRICE */
+.home-book-price {
+    font-weight: 700;
+    color: #ffd700;
+}
+
+/* BUTTON */
+.home-book-btn {
+    background: #2c6e49;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: 0.2s;
+}
+.home-book-btn:hover {
+    background: #3e8c61;
+}
+
+/* Hero section */
+.hero-overlay {
+    text-align: center;
+    padding: 100px 20px;             /* великі відступи */
+    background: linear-gradient(
+        rgba(0,0,0,0.6),
+        rgba(0,0,0,0.3)
+    );                               /* плавний градієнт */
+    border-radius: 16px;
+    max-width: 1000px;
+    margin: 0 auto 80px auto;        /* по центру сторінки */
+    box-shadow: 0 12px 28px rgba(0,0,0,0.5);
+}
+
+/* Заголовок */
+.hero-overlay h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    text-shadow: 0 0 18px rgba(0,0,0,0.7);
+}
+
+/* Підзаголовок */
+.hero-overlay p {
+    font-size: 1.5rem;
+    color: #eee;
+    margin-bottom: 40px;

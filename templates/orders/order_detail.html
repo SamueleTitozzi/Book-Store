@@ -1,0 +1,120 @@
+{% extends "mysite/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="order-detail-card">
+
+        <div class="card shadow-lg border-0">
+
+            <!-- HEADER -->
+            <div class="card-header bg-dark text-white d-flex justify-content-between">
+                <h5>Замовлення №{{ order.id }}</h5>
+                <span>{{ order.created_at|date:"d.m.Y H:i" }}</span>
+            </div>
+
+            <div class="order-progress">
+
+                <div class="progress-step {% if order.status != 'pending' %}active{% endif %}">
+                    <div class="circle">1</div>
+                    <span>Очікує</span>
+                </div>
+
+                <div class="progress-step {% if order.status == 'processing' or order.status == 'shipped' or order.status == 'delivered' %}active{% endif %}">
+                    <div class="circle">2</div>
+                    <span>В обробці</span>
+                </div>
+
+                <div class="progress-step {% if order.status == 'shipped' or order.status == 'delivered' %}active{% endif %}">
+                    <div class="circle">3</div>
+                    <span>Відправлено</span>
+                </div>
+
+                <div class="progress-step {% if order.status == 'delivered' %}active{% endif %}">
+                    <div class="circle">4</div>
+                    <span>Доставлено</span>
+                </div>
+
+            </div>
+
+            <!-- BODY -->
+            <div class="card-body">
+
+                <div class="row">
+
+                    <!-- Ліва частина -->
+                    <div class="col-md-6">
+                        <h6>👤 Дані покупця</h6>
+                        <p><strong>Ім’я:</strong> {{ order.first_name }} {{ order.last_name }}</p>
+                        <p><strong>Email:</strong> {{ order.email }}</p>
+                        <p><strong>Телефон:</strong> {{ order.phone }}</p>
+                        <p><strong>Адреса:</strong> {{ order.address }}</p>
+                    </div>
+
+                    <!-- Права частина -->
+                    <div class="col-md-6">
+                        <h6>📦 Деталі замовлення</h6>
+
+                        <p>
+                            <strong>Статус:</strong>
+                            {% if order.status == 'processing' %}
+                            <span class="badge bg-warning text-dark">В обробці</span>
+                            {% elif order.status == 'shipped' %}
+                            <span class="badge bg-info">Відправлено</span>
+                            {% elif order.status == 'delivered' %}
+                            <span class="badge bg-success">Доставлено</span>
+                            {% elif order.status == 'cancelled' %}
+                            <span class="badge bg-danger">Скасовано</span>
+                            {% endif %}
+                        </p>
+
+                        <p>
+                            <strong>Оплата:</strong>
+                            {% if order.is_paid %}
+                            <span class="badge bg-success">Оплачено</span>
+                            {% else %}
+                            <span class="badge bg-danger">Не оплачено</span>
+                            {% endif %}
+                        </p>
+
+                        <p><strong>Метод оплати:</strong> {{ order.get_payment_method_display }}</p>
+                        <p><strong>Доставка:</strong> {{ order.get_delivery_method_display }}</p>
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <!-- ТОВАРИ -->
+                <h6>📚 Товари</h6>
+
+                <ul class="list-group">
+                    {% for item in items %}
+                    <li class="list-group-item d-flex justify-content-between">
+                        <div>
+                            {{ item.book.title }} (x{{ item.quantity }})
+                        </div>
+                        <div>
+                            {{ item.get_total_price }} грн
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+                <div class="text-end mt-3">
+                    <h5>Загальна сума: {{ order.get_total_price }} грн</h5>
+                </div>
+
+            </div>
+
+            <!-- FOOTER -->
+            <div class="card-footer text-end">
+                <a href="{% url 'orders:order_history' %}" class="btn btn-secondary">
+                    ← Назад до замовлень
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

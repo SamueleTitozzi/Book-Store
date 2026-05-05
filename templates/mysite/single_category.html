@@ -1,0 +1,39 @@
+{% extends 'mysite/base.html' %}
+{% load static %}
+
+{% block content %}
+<h2 class="category-title">Книги категорії: {{ category.title }}</h2>
+{% if next_category %}
+<div class="next-category-button">
+    <a href="{% url 'mysite:single_category' next_category.pk %}" class="btn btn-buy">
+        Наступна категорія →
+    </a>
+</div>
+{% endif %}
+
+<div class="book-grid">
+    {% for book in books %}
+    <div class="book-card">
+        {% if book.image_path %}
+        <a href="{% url 'mysite:book-detail' book.id %}"><img src="{% static book.image_path %}" alt="{{ book.title }}"
+                                                              class="book-image"></a>
+        {% else %}
+        <img src="{% static 'base/default.jpg' %}" alt="Немає фото" class="book-image">
+        {% endif %}
+        <div class="book-info">
+            <h3 class="book-title">{{ book.title }}</h3>
+            <p class="book-author"><strong>Автор:</strong> {{ book.author }}</p>
+            <p class="book-price"><strong>Ціна:</strong> {{ book.price }}₴</p>
+            <div class="buy-button-wrapper">
+                <form action="{% url 'orders:add_to_cart' book.pk %}" method="post" class="add-to-cart-form">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-buy">Купити</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-center">Немає книг у цій категорії.</p>
+    {% endfor %}
+</div>
+{% endblock %}

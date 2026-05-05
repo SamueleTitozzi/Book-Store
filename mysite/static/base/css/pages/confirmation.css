@@ -1,0 +1,37 @@
+.confirmation-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.confirmation-card {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+.confirmation-icon {
+    font-size: 3rem;
+    color: #28a745; /* зелений */
+    margin-bottom: 15px;
+}
+
+.confirmation-title {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.confirmation-status, .confirmation-total {
+    margin: 10px 0;
+    font-size: 1.1rem;
+}
+
+.confirmation-actions {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}

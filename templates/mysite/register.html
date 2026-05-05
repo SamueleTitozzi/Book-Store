@@ -1,0 +1,12 @@
+{% extends 'mysite/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="register-container">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Зареєструватися</button>
+    </form>
+</div>
+{% endblock %}

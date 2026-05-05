@@ -1,0 +1,144 @@
+/* ================= AUTH PAGES ================= */
+
+/* Логін форма */
+.login-form {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Поля вводу */
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Кнопка логіну */
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #3e8c61;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+button[type="submit"]:hover {
+    background-color: #7a523d;
+}
+
+/* Повідомлення про помилки */
+.errorlist {
+    color: red;
+    margin-bottom: 10px;
+    list-style: none;
+    padding-left: 0;
+}
+
+/* Кнопки авторизації */
+.login-btn {
+    background-color: #5c3d2e;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+.login-btn:hover {
+    background-color: #7a523d;
+    color: #fff;
+}
+
+/* Реєстрація */
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+}
+.register-container form {
+    max-width: 400px;
+    width: 100%;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+.register-container input[type="text"],
+.register-container input[type="email"],
+.register-container input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.register-container button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background-color: #5c3d2e;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.register-container button[type="submit"]:hover {
+    background-color: #7a523d;
+}
+
+/* Кнопки входу/реєстрації */
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.btn-login,
+.btn-register {
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    color: white;
+}
+.btn-login {
+    background-color: #5c3d2e;
+}
+.btn-login:hover {
+    background-color: #7a523d;
+}
+.btn-register {
+    background-color: #3e6e4c;
+}
+.btn-register:hover {
+    background-color: #4f8a5f;
+}
+
+/* Кнопка виходу */
+.btn-logout {
+    background-color: #a33a3a;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+.btn-logout:hover {
+    background-color: #c94f4f;
+}

@@ -1,0 +1,29 @@
+{% extends 'mysite/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="book-detail-container">
+  <div class="book-detail-card">
+    <div class="book-detail-image">
+      {% if book.image_path %}
+        <img src="{% static book.image_path %}" alt="{{ book.title }}">
+      {% else %}
+        <img src="{% static 'base/default.jpg' %}" alt="Немає фото">
+      {% endif %}
+    </div>
+    <div class="book-detail-info">
+      <h2 class="book-detail-title">{{ book.title }}</h2>
+      <p class="book-detail-author"><strong>Автор:</strong> {{ book.author }}</p>
+      <p class="book-detail-price"><strong>Ціна:</strong> {{ book.price }}₴</p>
+      <p class="book-detail-description">{{ book.description|linebreaksbr }}</p>
+      <div class="book-detail-buttons">
+        <a href="{% url 'mysite:single_category' book.category.id %}" class="btn-back">← Назад до категорії</a>
+           <form action="{% url 'orders:add_to_cart' book.pk %}" method="post" class="add-to-cart-form">
+            {% csrf_token %}
+               <button type="submit" class="btn btn-buy">Купити</button>
+           </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
