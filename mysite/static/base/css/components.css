@@ -152,6 +152,19 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
+button.btn.order-history-cancelled-btn {
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+button.btn.order-history-cancelled-btn:hover {
+    background-color: red;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
 /* ERROR LIST */
 .errorlist {
     color: red;

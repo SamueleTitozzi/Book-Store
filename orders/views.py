@@ -1,6 +1,7 @@
 import logging
 
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse, HttpResponse
@@ -26,7 +27,7 @@ from mysite.services.order_service import (
 
 from mysite.services.payment_service import (
     create_payment_intent,
-    verify_webhook
+    verify_webhook, refund_payment
 )
 
 from orders.models import Order, OrderItem
@@ -111,6 +112,51 @@ class OrderConfirmationView(LoginRequiredMixin, TemplateView):
         order = get_object_or_404(Order, pk=self.kwargs['pk'], user=self.request.user)
         context['order'] = order
         return context
+
+
+class CancelOrderView(AutoTemplateNameMixin, LoginRequiredMixin, View): # (order_service: )
+
+    def post(self, request, pk):
+
+        order = get_object_or_404(
+            Order,
+            pk=pk,
+            user=request.user
+        )
+
+        if not order.can_be_cancelled:
+            messages.error(
+                request,
+                "Замовлення вже не можна скасувати."
+            )
+            return redirect("orders:order_history")
+
+        try:
+
+            if order.is_paid:
+
+                refund_payment(order)
+
+                order.status = 'refunded'
+
+            else:
+
+                order.status = 'cancelled'
+
+            order.save(update_fields=['status'])
+
+            messages.success(
+                request,
+                "Замовлення успішно скасовано."
+            )
+
+        except Exception as e:
+
+            messages.error(
+                request,
+                f"Помилка повернення коштів: {str(e)}"
+            )
+        return redirect("orders:order_history")
 
 
 @method_decorator(login_required, name='dispatch')

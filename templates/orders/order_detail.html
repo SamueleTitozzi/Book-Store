@@ -9,11 +9,18 @@
 
             <!-- HEADER -->
             <div class="card-header bg-dark text-white d-flex justify-content-between">
-                <h5>Замовлення №{{ order.id }}</h5>
-                <span>{{ order.created_at|date:"d.m.Y H:i" }}</span>
+                <h5 class="order-header-title">Замовлення №{{ order.id }}</h5>
+                <span class="order-date">{{ order.created_at|date:"d.m.Y H:i" }}</span>
             </div>
 
             <div class="order-progress">
+
+                {% if order.status == 'cancelled' %}
+                    <div class="progress-step active cancelled">
+                        <div class="circle">✖</div>
+                        <span>Скасоване</span>
+                    </div>
+                {% else %}
 
                 <div class="progress-step {% if order.status != 'pending' %}active{% endif %}">
                     <div class="circle">1</div>
@@ -34,7 +41,7 @@
                     <div class="circle">4</div>
                     <span>Доставлено</span>
                 </div>
-
+                {% endif %}
             </div>
 
             <!-- BODY -->
@@ -70,7 +77,9 @@
 
                         <p>
                             <strong>Оплата:</strong>
-                            {% if order.is_paid %}
+                            {% if order.status == 'refunded' %}
+                            <span class="badge bg-info">💸 Повернуто кошти</span>
+                            {% elif order.is_paid %}
                             <span class="badge bg-success">Оплачено</span>
                             {% else %}
                             <span class="badge bg-danger">Не оплачено</span>

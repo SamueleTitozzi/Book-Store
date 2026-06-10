@@ -49,6 +49,32 @@
     z-index: 0;
 }
 
+.order-detail-card h5.order-header-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffc107;
+    margin-bottom: 20px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 0.5px;
+}
+
+.order-detail-card span.order-date {
+    font-size: 1.2rem;
+    color: #ffc107;
+    font-weight: 700;
+    border-bottom: 2px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: 0.5px;
+    margin-bottom: 20px;
+    padding-bottom: 6px;
+}
+
 .progress-step {
     position: relative;
     text-align: center;
@@ -68,9 +94,19 @@
     transition: 0.3s;
 }
 
+.progress-step.active.cancelled .circle {
+    background: #dc3545;
+    color: #fff;
+}
+
 .progress-step span {
     font-size: 14px;
     color: #666;
+}
+
+.progress-step.active.cancelled span {
+    color: #dc3545;
+    font-weight: 600;
 }
 
 /* ACTIVE */
@@ -93,6 +129,10 @@
     height: 4px;
     background: #28a745;
     z-index: -1;
+}
+
+.progress-step.active.cancelled::after {
+    background: #dc3545;
 }
 
 .progress-step:first-child::after {

@@ -18,4 +18,5 @@ urlpatterns = [
     path('check-status/<int:pk>/', views.CheckOrderStatusView.as_view(), name='check_status'),
     path('confirm-payment/<int:pk>/', views.ConfirmPaymentView.as_view(), name='confirm_payment'),
     path('detail/<int:pk>/', views.OrderDetailView.as_view(), name='order_detail'),
+    path('order/<int:pk>/cancel/', views.CancelOrderView.as_view(), name='cancel_order')
 ]

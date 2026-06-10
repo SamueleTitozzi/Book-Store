@@ -13,6 +13,7 @@ class Order(models.Model):
         ('shipped', 'Відправлено'),
         ('delivered', 'Доставлено'),
         ('cancelled', 'Скасовано'),
+        ('refunded', 'Повернено кошти')
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -43,6 +44,17 @@ class Order(models.Model):
 
     def get_total_price(self):
         return sum(item.get_total_price() for item in self.items.all())
+
+    """Замовлення можна скасувати лише поки воно не передано в обробку."""
+
+    @property
+    def can_be_cancelled(self):
+        return self.status not in [
+            'shipped',
+            'delivered',
+            'cancelled',
+            'refunded'
+        ]
 
     def __str__(self):
         return f"Order {self.pk} by {self.user.username}"
