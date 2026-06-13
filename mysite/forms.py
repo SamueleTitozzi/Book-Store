@@ -7,7 +7,6 @@ from orders.models import Order
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=150, label="Ім'я")
     password = forms.CharField(widget=forms.PasswordInput, label='Пароль')
-    email = forms.CharField(widget=forms.EmailInput, label='E-mail')
 
 
 class RegisterForm(forms.Form):
