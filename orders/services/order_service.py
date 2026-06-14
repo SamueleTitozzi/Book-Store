@@ -116,3 +116,64 @@ def process_cod_order(order):
     order.is_paid = False
     order.save(update_fields=['status', 'is_paid'])
     return order
+
+
+class OrderCancellationError(Exception):
+    pass
+
+
+@transaction.atomic
+def restore_order_stock(order):
+    for item in order.items.select_related('book'):
+        book = Book.objects.select_for_update().get(pk=item.book_id)
+        book.stock += item.quantity
+        book.save(update_fields=['stock'])
+
+
+@transaction.atomic
+def cancel_order(order):
+    if not order.can_be_cancelled:
+        raise OrderCancellationError("Замовлення вже не можна скасувати.")
+
+    now = timezone.now()
+    order.cancelled_at = now
+
+    if order.status == Order.STATUS_PROCESSING:
+        if order.is_online_paid:
+            from orders.services.payment_service import refund_payment
+            refund_payment(order)
+            order.refunded_at = now
+
+        restore_order_stock(order)
+        order.status = Order.STATUS_CANCELLED
+        order.save(update_fields=['status', 'cancelled_at', 'refunded_at'])
+        return 'cancelled'
+
+    if order.status in (Order.STATUS_SHIPPED, Order.STATUS_DELIVERED):
+        if order.is_online_paid:
+            order.status = Order.STATUS_RETURN_PENDING
+            order.save(update_fields=['status', 'cancelled_at'])
+            return 'return_pending'
+
+        order.status = Order.STATUS_CANCELLED
+        order.save(update_fields=['status', 'cancelled_at'])
+        return 'cancelled'
+
+    raise OrderCancellationError("Замовлення вже не можна скасувати.")
+
+
+@transaction.atomic
+def complete_return_and_refund(order):
+    if order.status != Order.STATUS_RETURN_PENDING:
+        raise OrderCancellationError("Замовлення не очікує повернення товару.")
+
+    now = timezone.now()
+
+    if order.is_online_paid and not order.is_refunded:
+        from orders.services.payment_service import refund_payment
+        refund_payment(order)
+        order.refunded_at = now
+
+    restore_order_stock(order)
+    order.status = Order.STATUS_CANCELLED
+    order.save(update_fields=['status', 'refunded_at'])

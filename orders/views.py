@@ -16,7 +16,9 @@ from mysite.models import Book
 from orders.models import Order, OrderItem
 from orders.services.order_service import (
     InsufficientStockError,
+    OrderCancellationError,
     add_book_to_order,
+    cancel_order,
     clear_pending_order,
     decrease_quantity,
     get_or_create_order,
@@ -30,7 +32,6 @@ from orders.services.order_service import (
 from orders.services.payment_service import (
     handle_payment_intent_event,
     payment_intent_succeeded,
-    refund_payment,
     save_payment_intent,
     verify_webhook,
 )
@@ -142,22 +143,27 @@ class CancelOrderView(AutoTemplateNameMixin, LoginRequiredMixin, View):
     def post(self, request, pk):
         order = get_object_or_404(Order, pk=pk, user=request.user)
 
-        if not order.can_be_cancelled:
-            messages.error(request, "Замовлення вже не можна скасувати.")
-            return redirect("orders:order_history")
-
         try:
-            if order.is_paid:
-                refund_payment(order)
-                order.status = 'refunded'
-            else:
-                order.status = 'cancelled'
+            result = cancel_order(order)
 
-            order.save(update_fields=['status'])
-            messages.success(request, "Замовлення успішно скасовано.")
+            if result == 'return_pending':
+                messages.success(
+                    request,
+                    "Заявку на скасування прийнято. Повернення коштів відбудеться "
+                    "після отримання товару на склад.",
+                )
+            elif order.is_refunded:
+                messages.success(
+                    request,
+                    "Замовлення скасовано. Кошти повернено на вашу картку.",
+                )
+            else:
+                messages.success(request, "Замовлення успішно скасовано.")
+        except OrderCancellationError as exc:
+            messages.error(request, str(exc))
         except Exception as exc:
             logger.exception("Order cancellation failed for order %s", pk)
-            messages.error(request, f"Помилка повернення коштів: {exc}")
+            messages.error(request, f"Помилка скасування: {exc}")
 
         return redirect("orders:order_history")
 

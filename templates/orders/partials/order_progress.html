@@ -1,0 +1,31 @@
+{% if order.status == 'cancelled' or order.status == 'refunded' %}
+    <div class="progress-step active cancelled">
+        <div class="circle">✖</div>
+        <span>Скасовано</span>
+    </div>
+{% elif order.status == 'return_pending' %}
+    <div class="progress-step active return-pending">
+        <div class="circle">↩</div>
+        <span>Очікує повернення</span>
+    </div>
+{% else %}
+    <div class="progress-step {% if order.status != 'pending' %}active{% endif %}">
+        <div class="circle">1</div>
+        <span>Очікує</span>
+    </div>
+
+    <div class="progress-step {% if order.status == 'processing' or order.status == 'shipped' or order.status == 'delivered' %}active{% endif %}">
+        <div class="circle">2</div>
+        <span>В обробці</span>
+    </div>
+
+    <div class="progress-step {% if order.status == 'shipped' or order.status == 'delivered' %}active{% endif %}">
+        <div class="circle">3</div>
+        <span>Відправлено</span>
+    </div>
+
+    <div class="progress-step {% if order.status == 'delivered' %}active{% endif %}">
+        <div class="circle">4</div>
+        <span>Доставлено</span>
+    </div>
+{% endif %}

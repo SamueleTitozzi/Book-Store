@@ -135,6 +135,20 @@
     background: #dc3545;
 }
 
+.progress-step.active.return-pending .circle {
+    background: #fd7e14;
+    color: #fff;
+}
+
+.progress-step.active.return-pending span {
+    color: #fd7e14;
+    font-weight: 600;
+}
+
+.progress-step.active.return-pending::after {
+    background: #fd7e14;
+}
+
 .progress-step:first-child::after {
     display: none;
 }

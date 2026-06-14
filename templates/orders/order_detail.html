@@ -7,49 +7,25 @@
 
         <div class="card shadow-lg border-0">
 
-            <!-- HEADER -->
             <div class="card-header bg-dark text-white d-flex justify-content-between">
                 <h5 class="order-header-title">Замовлення №{{ order.id }}</h5>
                 <span class="order-date">{{ order.created_at|date:"d.m.Y H:i" }}</span>
             </div>
 
             <div class="order-progress">
-
-                {% if order.status == 'cancelled' %}
-                    <div class="progress-step active cancelled">
-                        <div class="circle">✖</div>
-                        <span>Скасоване</span>
-                    </div>
-                {% else %}
-
-                <div class="progress-step {% if order.status != 'pending' %}active{% endif %}">
-                    <div class="circle">1</div>
-                    <span>Очікує</span>
-                </div>
-
-                <div class="progress-step {% if order.status == 'processing' or order.status == 'shipped' or order.status == 'delivered' %}active{% endif %}">
-                    <div class="circle">2</div>
-                    <span>В обробці</span>
-                </div>
-
-                <div class="progress-step {% if order.status == 'shipped' or order.status == 'delivered' %}active{% endif %}">
-                    <div class="circle">3</div>
-                    <span>Відправлено</span>
-                </div>
-
-                <div class="progress-step {% if order.status == 'delivered' %}active{% endif %}">
-                    <div class="circle">4</div>
-                    <span>Доставлено</span>
-                </div>
-                {% endif %}
+                {% include "orders/partials/order_progress.html" %}
             </div>
 
-            <!-- BODY -->
+            {% if order.status == 'return_pending' %}
+            <div class="alert alert-warning mx-3">
+                Заявку на скасування прийнято. Повернення коштів відбудеться після отримання товару на склад.
+            </div>
+            {% endif %}
+
             <div class="card-body">
 
                 <div class="row">
 
-                    <!-- Ліва частина -->
                     <div class="col-md-6">
                         <h6>👤 Дані покупця</h6>
                         <p><strong>Ім’я:</strong> {{ order.first_name }} {{ order.last_name }}</p>
@@ -58,32 +34,17 @@
                         <p><strong>Адреса:</strong> {{ order.address }}</p>
                     </div>
 
-                    <!-- Права частина -->
                     <div class="col-md-6">
                         <h6>📦 Деталі замовлення</h6>
 
                         <p>
                             <strong>Статус:</strong>
-                            {% if order.status == 'processing' %}
-                            <span class="badge bg-warning text-dark">В обробці</span>
-                            {% elif order.status == 'shipped' %}
-                            <span class="badge bg-info">Відправлено</span>
-                            {% elif order.status == 'delivered' %}
-                            <span class="badge bg-success">Доставлено</span>
-                            {% elif order.status == 'cancelled' %}
-                            <span class="badge bg-danger">Скасовано</span>
-                            {% endif %}
+                            {% include "orders/partials/order_status_badge.html" %}
                         </p>
 
                         <p>
                             <strong>Оплата:</strong>
-                            {% if order.status == 'refunded' %}
-                            <span class="badge bg-info">💸 Повернуто кошти</span>
-                            {% elif order.is_paid %}
-                            <span class="badge bg-success">Оплачено</span>
-                            {% else %}
-                            <span class="badge bg-danger">Не оплачено</span>
-                            {% endif %}
+                            {% include "orders/partials/order_payment_badge.html" %}
                         </p>
 
                         <p><strong>Метод оплати:</strong> {{ order.get_payment_method_display }}</p>
@@ -94,7 +55,6 @@
 
                 <hr>
 
-                <!-- ТОВАРИ -->
                 <h6>📚 Товари</h6>
 
                 <ul class="list-group">
@@ -116,11 +76,21 @@
 
             </div>
 
-            <!-- FOOTER -->
-            <div class="card-footer text-end">
+            <div class="card-footer text-end d-flex justify-content-end gap-2">
                 <a href="{% url 'orders:order_history' %}" class="btn btn-secondary">
                     ← Назад до замовлень
                 </a>
+
+                {% if order.can_be_cancelled %}
+                <form method="post"
+                      action="{% url 'orders:cancel_order' order.id %}"
+                      onsubmit="return confirm('{% if order.status == 'shipped' or order.status == 'delivered' %}Замовлення вже відправлено. Кошти будуть повернені після повернення товару на склад. Продовжити?{% else %}Ви дійсно хочете скасувати це замовлення?{% endif %}')">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-outline-danger btn-sm">
+                        ❌ Скасувати
+                    </button>
+                </form>
+                {% endif %}
             </div>
 
         </div>
