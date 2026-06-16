@@ -1,0 +1,29 @@
+{% extends "mysite/base.html" %}
+{% block title %}Вхід для адміністратора{% endblock %}
+
+{% block content %}
+<div class="admin-login-container">
+  <div class="admin-login-card">
+    <h3>Адмін-панель</h3>
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="id_username">Логін</label>
+        <input type="text" name="username" id="id_username" required>
+      </div>
+      <div class="mb-3">
+        <label for="id_password">Пароль</label>
+        <input type="password" name="password" id="id_password" required>
+      </div>
+      {% if messages %}
+        <div class="alert alert-danger">
+          {% for message in messages %}
+            {{ message }}
+          {% endfor %}
+        </div>
+      {% endif %}
+      <button type="submit" class="btn btn-success w-100">Увійти</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

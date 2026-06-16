@@ -16,9 +16,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from mysite.views import UserLoginView, RegisterView, UserLogoutView
+from dashboard.views import AdminLoginView
+from django.contrib.auth.decorators import user_passes_test
+
+def is_admin_user(user):
+    return (user.is_superuser or user.groups.filter(name__in=["ProductManager", "OrderManager"]).exists())
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    # застосунки
     path('', include('mysite.urls', namespace='mysite')),
     path('orders/', include('orders.urls', namespace='orders')),
+    path('dashboard/', include('dashboard.urls', namespace='dashboard')),
+
+    # авторизація
+    path('login/', UserLoginView.as_view(), name='login'),
+    path('register/', RegisterView.as_view(), name='register'),
+    path('logout/', UserLogoutView.as_view(next_page='mysite:index'), name='logout'),
+
+    # адмінка
+    path('admin-login/', AdminLoginView.as_view(), name='admin-login'),
 ]

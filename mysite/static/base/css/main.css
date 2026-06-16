@@ -12,3 +12,8 @@
 @import url('./pages/checkout.css');
 @import url('./pages/confirmation.css');
 @import url('./pages/orders-detail.css');
+@import url('./pages/admin-login.css');
+@import url('./pages/admin-home-pages.css');
+@import url('./pages/product_list.css');
+@import url('./pages/order_detail-dashboard.css');
+@import url('./pages/order_list-dashboard.css');

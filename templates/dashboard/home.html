@@ -1,0 +1,23 @@
+{% extends "mysite/base.html" %}
+{% block title %}Адмін-панель{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h2>Адмін-панель</h2>
+    <p>Оберіть розділ для роботи</p>
+  </div>
+
+  <div class="dashboard-links">
+    <a href="{% url 'dashboard:products' %}" class="dashboard-card">
+      <h4>📦 Товари</h4>
+      <p>Керування товарами магазину</p>
+    </a>
+
+    <a href="{% url 'dashboard:orders' %}" class="dashboard-card">
+      <h4>🧾 Замовлення</h4>
+      <p>Перегляд та обробка замовлень</p>
+    </a>
+  </div>
+</div>
+{% endblock %}

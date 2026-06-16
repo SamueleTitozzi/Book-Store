@@ -1,0 +1,65 @@
+/* Контейнер */
+.dashboard-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    position: relative;
+    z-index: 2; /* щоб бути поверх фону */
+}
+
+/* Заголовок */
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 40px;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 20px;
+    border-radius: 10px;
+    width: 100%;          /* займає всю ширину */
+    display: block;       /* блочний елемент */
+}
+
+.dashboard-header h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #222;
+}
+.dashboard-header p {
+    color: #444;
+    font-size: 1.1rem;
+}
+
+/* Картки */
+.dashboard-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.dashboard-card {
+    flex: 1 1 300px;
+    background: rgba(255, 255, 255, 0.9); /* напівпрозорий білий */
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.dashboard-card h4 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #28a745;
+}
+
+.dashboard-card p {
+    font-size: 1rem;
+    color: #555;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+}

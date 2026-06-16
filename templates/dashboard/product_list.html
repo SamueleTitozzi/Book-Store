@@ -1,0 +1,57 @@
+{% extends "mysite/base.html" %}
+{% block content %}
+<div class="dashboard-container">
+  <!-- Заголовок та кнопки -->
+  <div class="dashboard-header">
+    <h2>📚 Список книг</h2>
+    <div class="actions">
+      <button class="btn btn-filter">🔍 Фільтрувати</button>
+      <button class="btn btn-export">📤 Експорт</button>
+      <a href="{% url 'dashboard:product_create' %}" class="btn btn-add">➕ Додати книгу</a>
+    </div>
+  </div>
+
+  <!-- Таблиця -->
+  <div class="table-wrapper">
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Назва</th>
+          <th>Автор</th>
+          <th>Ціна</th>
+          <th>Категорія</th>
+          <th>На складі</th>
+          <th>Статус</th>
+          <th>Дії</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for book in products %}
+        <tr>
+          <td>#{{ book.id }}</td>
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.price }} грн</td>
+          <td>{{ book.category.title }}</td>
+          <td>{{ book.stock }}</td>
+          <td>
+            <span class="badge {% if book.stock > 0 %}active{% else %}inactive{% endif %}">
+              {% if book.stock > 0 %}В наявності{% else %}Немає{% endif %}
+            </span>
+          </td>
+          <td>
+            <a href="{% url 'dashboard:product_update' book.id %}" class="btn btn-edit">✏️</a>
+            <a href="{% url 'dashboard:product_delete' book.id %}" class="btn btn-delete">🗑️</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="8" class="text-center">Немає книг</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

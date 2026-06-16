@@ -1,0 +1,54 @@
+/* dashboard.css */
+
+/* Центрування форми */
+.admin-login-container {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Картка */
+.admin-login-card {
+    max-width: 400px;
+    width: 100%;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    padding: 2rem;
+}
+
+/* Заголовок */
+.admin-login-card h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Поля вводу */
+.admin-login-card input {
+    border-radius: 6px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+/* Кнопка */
+.admin-login-card button {
+    margin-top: 1rem;
+    border-radius: 6px;
+    padding: 10px;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.admin-login-card button:hover {
+    background: #218838; /* темніший зелений */
+    color: #fff;
+}
+
+/* Повідомлення */
+.admin-login-card .alert {
+    margin-top: 1rem;
+    border-radius: 6px;
+}

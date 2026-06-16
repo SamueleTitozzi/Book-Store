@@ -1,0 +1,43 @@
+{% extends "mysite/base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2 class="dashboard-title">Замовлення #{{ order.id }}</h2>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">👤 Клієнт</h5>
+      <p><strong>Ім’я:</strong> {{ order.first_name }} {{ order.last_name }}</p>
+      <p><strong>Email:</strong> {{ order.email }}</p>
+      <p><strong>Телефон:</strong> {{ order.phone }}</p>
+      <p><strong>Адреса:</strong> {{ order.address }}</p>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">📦 Статус замовлення</h5>
+      <p><span class="badge {{ order.status_badge_class }}">{{ order.status_display_label }}</span></p>
+      <h5 class="card-title">💳 Оплата</h5>
+      <p><span class="badge {{ order.payment_badge_class }}">{{ order.payment_display_label }}</span></p>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">📚 Товари</h5>
+      <ul>
+        {% for item in order.items.all %}
+          <li>{{ item.book.title }} — {{ item.quantity }} шт — {{ item.get_total_price }} грн</li>
+        {% endfor %}
+      </ul>
+      <p><strong>Загальна сума:</strong> {{ order.get_total_price }} грн</p>
+    </div>
+  </div>
+
+  <div class="actions">
+    <a href="{% url 'dashboard:order_update' order.id %}" class="btn btn-warning">✏️ Редагувати</a>
+    <a href="{% url 'dashboard:order_delete' order.id %}" class="btn btn-danger">🗑️ Видалити</a>
+    <a href="{% url 'dashboard:orders' %}" class="btn btn-secondary">⬅️ Назад</a>
+  </div>
+</div>
+{% endblock %}

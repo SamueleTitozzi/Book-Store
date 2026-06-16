@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mysite.apps.MysiteConfig',
     'orders.apps.OrdersConfig',
+    'dashboard.apps.DashboardConfig',
 ]
 
 MIDDLEWARE = [
@@ -38,6 +39,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'mysite.middleware.PendingOrderMiddleware',
+    'mysite.middleware.AdminAccessMiddleware',
 ]
 
 ROOT_URLCONF = 'base.urls'
@@ -91,6 +93,9 @@ STATICFILES_DIRS = [BASE_DIR / "mysite" / "static"]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "media"
 LOGIN_URL = 'mysite:login'
+LOGIN_REDIRECT_URL = 'dashboard:home'
+LOGOUT_REDIRECT_URL = 'mysite:index'
+
 
 if not DEBUG:
     SECURE_SSL_REDIRECT = config("SECURE_SSL_REDIRECT", default=True, cast=bool)
