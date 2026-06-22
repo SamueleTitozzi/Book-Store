@@ -12,16 +12,6 @@
     {% endif %}
   </div>
   
-
-  <!-- Перемикач ролей
-  <div class="dashboard-links mb-3">
-    {% if "products" in roles %}
-      <a href="{% url 'dashboard:products' %}" class="btn btn-secondary">
-        📚 Перейти до товарів
-      </a>
-    {% endif %}
-  </div> -->
-
   <table class="table table-striped table-hover">
     <thead class="table-dark">
       <tr>
@@ -44,7 +34,31 @@
         <td>
           <a href="{% url 'dashboard:order_detail' order.id %}" class="btn btn-info btn-sm">👁️</a>
           <a href="{% url 'dashboard:order_update' order.id %}" class="btn btn-warning btn-sm">✏️</a>
-          <a href="{% url 'dashboard:order_delete' order.id %}" class="btn btn-danger btn-sm">🗑️</a>
+          <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteModal{{ order.id }}">
+            🗑️
+          </button>
+          <!-- Модальне вікно -->
+  <div class="modal fade" id="deleteModal{{ order.id }}" tabindex="-1" aria-labelledby="deleteLabel{{ order.id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteLabel{{ order.id }}">Підтвердження видалення</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрити"></button>
+        </div>
+        <div class="modal-body">
+          Ви дійсно хочете видалити замовлення №{{ order.id }}?
+          <br><small class="text-muted">Цю дію неможливо скасувати.</small>
+        </div>
+        <div class="modal-footer">
+          <form method="post" action="{% url 'dashboard:order_delete' order.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Так, видалити</button>
+          </form>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Скасувати</button>
+        </div>
+      </div>
+    </div>
+  </div>
         </td>
       </tr>
       {% empty %}

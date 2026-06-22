@@ -6,7 +6,17 @@
     <h2>📚 Список книг</h2>
     <div class="actions">
       <button class="btn btn-filter">🔍 Фільтрувати</button>
-      <button class="btn btn-export">📤 Експорт</button>
+      <!-- <button class="btn btn-export">📤 Експорт</button> -->
+      <div class="btn-group">
+        <button type="button" class="btn btn-export dropdown-toggle" data-bs-toggle="dropdown">
+          📤 Експорт
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="{% url 'dashboard:export_books_csv' %}">CSV</a></li>
+          <li><a class="dropdown-item" href="{% url 'dashboard:export_books_excel' %}">Excel</a></li>
+          <li><a class="dropdown-item" href="{% url 'dashboard:export_books_pdf' %}">PDF</a></li>
+        </ul>
+      </div>
       <a href="{% url 'dashboard:product_create' %}" class="btn btn-add">➕ Додати книгу</a>
 
       {% if "orders" in roles %}

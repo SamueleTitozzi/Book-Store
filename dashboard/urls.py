@@ -10,6 +10,10 @@ urlpatterns = [
     path('products/<int:pk>/update/', views.product_update, name='product_update'),
     path('products/<int:pk>/delete/', views.product_delete, name='product_delete'),
     path('orders/', views.order_list, name='orders'),
+    path("books/export/csv/", views.export_books_csv, name="export_books_csv"),
+    path("books/export/excel/", views.export_books_excel, name="export_books_excel"),
+    path("books/export/pdf/", views.export_books_pdf, name="export_books_pdf"),
+
 
 
 

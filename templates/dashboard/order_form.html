@@ -1,0 +1,25 @@
+{% extends "mysite/base.html" %}
+
+{% block content %}
+<div class="order-form-container">
+  <h2 class="order-form-title">Редагування замовлення №{{ order.id }}</h2>
+
+  <form method="post" class="order-form">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+      <div class="form-group">
+        {{ field.label_tag }}
+        {{ field }}
+        {{ field.errors }}
+      </div>
+    {% endfor %}
+
+    <div class="form-actions">
+      <button type="submit" class="btn-save">💾 Зберегти</button>
+      <a href="{% url 'dashboard:orders' %}" class="btn-cancel">⬅️ Назад</a>
+    </div>
+  </form>
+</div>
+{% endblock %}
