@@ -9,15 +9,19 @@
   </div>
 
   <div class="dashboard-links">
-    <a href="{% url 'dashboard:products' %}" class="dashboard-card">
-      <h4>📦 Товари</h4>
-      <p>Керування товарами магазину</p>
-    </a>
+    {% if "products" in roles %}
+      <a href="{% url 'dashboard:products' %}" class="dashboard-card">
+        <h4>📦 Товари</h4>
+        <p>Керування товарами магазину</p>
+      </a>
+    {% endif %}
 
-    <a href="{% url 'dashboard:orders' %}" class="dashboard-card">
-      <h4>🧾 Замовлення</h4>
-      <p>Перегляд та обробка замовлень</p>
-    </a>
+    {% if "orders" in roles %}
+      <a href="{% url 'dashboard:orders' %}" class="dashboard-card">
+        <h4>🧾 Замовлення</h4>
+        <p>Перегляд та обробка замовлень</p>
+      </a>
+    {% endif %}
   </div>
 </div>
 {% endblock %}

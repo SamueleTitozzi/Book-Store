@@ -1,0 +1,25 @@
+{% extends "mysite/base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="products-title">
+        {% if form.instance.pk %}
+          Редагувати товар: {{ form.instance.title }}
+        {% else %}
+          Додати товар
+        {% endif %}
+      </h2>
+
+    <div class="card">
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="actions">
+                    <a href="{% url 'dashboard:products' %}" class="btn btn-secondary">⬅️ Назад</a>
+                    <button type="submit" class="btn btn-success">💾 Зберегти</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,7 +1,27 @@
 {% extends "mysite/base.html" %}
+{% block title %}Список замовлень{% endblock %}
+
 {% block content %}
 <div class="container mt-4">
-  <h2 class="orders-title">📦 Список замовлень</h2>
+  <div class="dashboard-header d-flex justify-content-between align-items-center mb-3">
+    <h2 class="orders-title">📦 Список замовлень</h2>
+    {% if "products" in roles %}
+      <a href="{% url 'dashboard:products' %}" class="btn btn-secondary">
+        📚 Перейти до товарів
+      </a>
+    {% endif %}
+  </div>
+  
+
+  <!-- Перемикач ролей
+  <div class="dashboard-links mb-3">
+    {% if "products" in roles %}
+      <a href="{% url 'dashboard:products' %}" class="btn btn-secondary">
+        📚 Перейти до товарів
+      </a>
+    {% endif %}
+  </div> -->
+
   <table class="table table-striped table-hover">
     <thead class="table-dark">
       <tr>

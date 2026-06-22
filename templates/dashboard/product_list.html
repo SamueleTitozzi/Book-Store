@@ -2,12 +2,18 @@
 {% block content %}
 <div class="dashboard-container">
   <!-- Заголовок та кнопки -->
-  <div class="dashboard-header">
+  <div class="dashboard-header d-flex justify-content-between align-items-center mb-3">
     <h2>📚 Список книг</h2>
     <div class="actions">
       <button class="btn btn-filter">🔍 Фільтрувати</button>
       <button class="btn btn-export">📤 Експорт</button>
       <a href="{% url 'dashboard:product_create' %}" class="btn btn-add">➕ Додати книгу</a>
+
+      {% if "orders" in roles %}
+        <a href="{% url 'dashboard:orders' %}" class="btn btn-secondary">
+          🧾 Перейти до замовлень
+        </a>
+      {% endif %}
     </div>
   </div>
 

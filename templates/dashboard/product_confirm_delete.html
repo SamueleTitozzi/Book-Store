@@ -1,0 +1,22 @@
+{% extends "mysite/base.html" %}
+{% block content %}
+<div class="container mt-4">
+  <h2 class="products-title">Видалити книгу "{{ book.title }}"?</h2>
+  <p class="delete-warning">
+    Ви намагаєтесь видалити книгу <strong>{{ book.title }}</strong> автора <strong>{{ book.author }}</strong>.
+    Цю дію неможливо скасувати.
+  </p>
+
+  <div class="card">
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        <div class="actions">
+          <a href="{% url 'dashboard:products' %}" class="btn btn-secondary">⬅️ Скасувати</a>
+          <button type="submit" class="btn btn-danger">🗑️ Видалити</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

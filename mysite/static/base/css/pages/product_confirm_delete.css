@@ -1,0 +1,47 @@
+.actions {
+    margin-top: 25px;
+    display: flex;
+    gap: 12px; /* відступ між кнопками */
+    justify-content: flex-end; /* вирівнювання вправо */
+}
+
+.actions .btn {
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 9px 16px;
+    transition: all 0.25s ease;
+}
+
+.actions .btn-danger {
+    background-color: #dc3545;
+    border: none;
+}
+
+.actions .btn-danger:hover {
+    background-color: #b02a37;
+    transform: translateY(-2px);
+}
+
+.actions .btn-secondary {
+    background-color: #6c757d;
+    border: none;
+}
+
+.actions .btn-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
+
+.delete-warning {
+    font-size: 1.7rem;
+    color: #ffffff;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.delete-warning strong {
+    color: #f10018;
+    font-weight: 700;
+}
+

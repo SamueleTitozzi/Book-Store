@@ -17,3 +17,5 @@
 @import url('./pages/product_list.css');
 @import url('./pages/order_detail-dashboard.css');
 @import url('./pages/order_list-dashboard.css');
+@import url('./pages/product-form.css');
+@import url('./pages/product_confirm_delete.css');

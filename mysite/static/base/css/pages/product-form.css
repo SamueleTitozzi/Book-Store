@@ -1,0 +1,82 @@
+/* Заголовок */
+.products-title {
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 8px;
+    text-align: center;
+}
+
+/* Карточка */
+.card {
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 24px;
+    border: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+}
+
+.card-body {
+    padding: 22px;
+}
+
+/* Поля вводу */
+.card-body input,
+.card-body select,
+.card-body textarea {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card-body input:focus,
+.card-body select:focus,
+.card-body textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 6px rgba(0,123,255,0.25);
+    outline: none;
+}
+
+/* Кнопки */
+.actions {
+    margin-top: 25px;
+    display: flex;
+    gap: 12px;
+}
+
+.actions .btn {
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 9px 16px;
+    transition: all 0.25s ease;
+}
+
+.actions .btn-secondary {
+    order: -1;
+}
+
+.actions .btn-success:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+
+.actions .btn-secondary {
+    background-color: #6c757d;
+    border: none;
+}
+
+.actions .btn-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-2px);
+}
